@@ -1,7 +1,6 @@
 import {
   Clock3,
   Mail,
-  MapPin,
   MessageCircle,
   Phone,
   Send,
@@ -83,7 +82,7 @@ ${values.message}`
       {/* Hero */}
       <section className="relative isolate overflow-hidden py-24 text-white">
         <img
-          src="public/images/market-image2.jpg"
+          src={`${import.meta.env.BASE_URL}images/market-image2.jpg`}
           alt="Lagos market produce"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />

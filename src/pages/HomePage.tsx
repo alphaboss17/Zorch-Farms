@@ -10,7 +10,7 @@ const steps = [{ icon: Search, title: 'Browse', body: 'Explore fresh produce and
 
 export function HomePage() { const popular = products.filter((product) => product.popular).slice(0, 4); return <>
   <section className="relative isolate flex min-h-[620px] items-center overflow-hidden bg-forest">
-  <img src="public\images\market.jpg" alt="Fresh Nigerian market produce" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" />
+  <img src={`${import.meta.env.BASE_URL}images/market.jpg`} alt="Fresh Nigerian market produce" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" />
   <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/75 to-forest/10" />
   <div className="page-shell py-24 text-white">
   <div className="max-w-2xl"><p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-mint backdrop-blur"><ShoppingBag size={14} /> provisions sourcing</p>
