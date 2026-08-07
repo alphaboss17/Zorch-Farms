@@ -1,10 +1,10 @@
 export const BUSINESS = {
   name: 'Zorch Farms',
   location: 'Majek, Bashorun Town, Lagos State, Nigeria',
-  phoneDisplay: '+234 8154780923',
-  phoneLink: 'tel:+2348154780923',
-  email: 'hello@zorchfarms.ng',
-  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER ?? '2348154780923',
+  phoneDisplay: '+234 8031310752',
+  phoneLink: 'tel:+2348031310752',
+  email: 'awele.juga@gmail.com',
+  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER ?? '2348031310752',
 } as const
 
 export const CATEGORY_META = {
