@@ -426,8 +426,6 @@ await saveActivity(
 )
 
 showToast('Product added successfully')
-
-      showToast('Product added successfully')
     } catch (error) {
       console.error(
         'Failed to add product:',

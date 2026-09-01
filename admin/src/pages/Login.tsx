@@ -75,46 +75,7 @@ export function Login() {
     }
   }
 
-  const resetPassword = async () => {
-  if (!email.trim()) {
-    setError('Please enter your email address first.')
-    return
-  }
-
-  setError('')
-  setLoading(true)
-
-  try {
-    const { error: resetError } =
-      await supabase.auth.resetPasswordForEmail(
-        email.trim(),
-        {
-          redirectTo: `${window.location.origin}/reset-password`,
-        },
-      )
-
-    if (resetError) {
-      throw resetError
-    }
-
-    setError(
-      'Password reset instructions have been sent to your email.',
-    )
-  } catch (error) {
-    console.error(
-      'Failed to send password reset email:',
-      error,
-    )
-
-    setError(
-      'Unable to send password reset instructions. Please try again.',
-    )
-  } finally {
-    setLoading(false)
-  }
-}
-
-const forgotPassword = async () => {
+  const forgotPassword = async () => {
   if (!email.trim()) {
     setError('Enter your email address first.')
     return
