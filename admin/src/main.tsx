@@ -11,6 +11,10 @@ import { Settings } from './pages/Settings'
 import './style.css'
 import { ProtectedRoute } from './components/ProtectedRoute'
 
+import { registerSW } from 'virtual:pwa-register'
+
+registerSW({ immediate: true })
+
 createRoot(document.getElementById('root')!).render(<StrictMode><CatalogProvider><BrowserRouter><Routes><Route path="/login" element={<Login />} />
 <Route
   element={
