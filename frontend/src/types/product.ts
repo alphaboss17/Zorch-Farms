@@ -1,13 +1,14 @@
 export type CategoryId =
   | 'fresh-produce'
-  | 'proteins'
-  | 'bulk-staples'
-  | 'pantry'
+  | 'frozen-foods'
+  | 'grains'
+  | 'oils'
+  | 'soups-spices'
 
 export interface ProductVariant {
   id: string
   product_id: string
-  measurement: string
+  measurement: string | null
   price: number
   available: boolean
   created_at?: string
@@ -31,7 +32,7 @@ export interface Product {
 
 export interface RequestItem {
   productId: string
-  measurement: string
+  measurement: string | null
   quantity: number
 }
 

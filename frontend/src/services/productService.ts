@@ -1,5 +1,27 @@
 import { supabase } from '../lib/supabase'
-import type { Product } from '../types/product'
+import type { CategoryId, Product } from '../types/product'
+
+function normalizeCategory(category: string): CategoryId {
+  switch (category) {
+    case 'Fresh Produce':
+      return 'fresh-produce'
+
+    case 'Frozen Foods':
+      return 'frozen-foods'
+
+    case 'Grains':
+      return 'grains'
+
+    case 'Oils':
+      return 'oils'
+
+    case 'Soups & Spices':
+      return 'soups-spices'
+
+    default:
+      throw new Error(`Unknown product category: ${category}`)
+  }
+}
 
 export async function getProducts(): Promise<Product[]> {
   const { data, error } = await supabase
@@ -20,7 +42,7 @@ export async function getProducts(): Promise<Product[]> {
     id: product.id,
     slug: product.slug,
     name: product.name,
-    category: product.category,
+    category: normalizeCategory(product.category),
     description: product.description,
     image_url: product.image_url,
     featured: product.featured,
@@ -31,3 +53,4 @@ export async function getProducts(): Promise<Product[]> {
     updated_at: product.updated_at,
   }))
 }
+

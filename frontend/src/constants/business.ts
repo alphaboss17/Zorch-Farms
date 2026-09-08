@@ -8,8 +8,33 @@ export const BUSINESS = {
 } as const
 
 export const CATEGORY_META = {
-  'fresh-produce': { name: 'Fresh Produce', description: 'Farm-fresh Tomatoes, Peppers, Eggs and Vegetables.', image: `${import.meta.env.BASE_URL}images/tomato-image.jpg` },
-  proteins: { name: 'Proteins', description: 'Frozen staples for every kitchen.', image: `${import.meta.env.BASE_URL}images/proteins-collage.jpg` },
-  'bulk-staples': { name: 'Bulk Staples', description: 'Buy in bulk wholesale quantities for business or household.', image: `${import.meta.env.BASE_URL}images/rice-egg-tomato.jpg` },
-  pantry: { name: 'Pantry & Oils', description: 'Kitchen essentials selected for everyday cooking.', image: `${import.meta.env.BASE_URL}images/veg-oil1.jpg` },
+  'fresh-produce': {
+    name: 'Fresh Produce',
+    description: 'Farm-fresh Tomatoes, Peppers, Eggs and Vegetables.',
+    image: `${import.meta.env.BASE_URL}images/tomato-image.jpg`,
+  },
+
+  'frozen-foods': {
+    name: 'Frozen Foods',
+    description: 'Quality frozen foods for every kitchen.',
+    image: `${import.meta.env.BASE_URL}images/proteins-collage.jpg`,
+  },
+
+  grains: {
+    name: 'Grains',
+    description: 'Rice, beans and other staple grains for your home or business.',
+    image: `${import.meta.env.BASE_URL}images/rice-egg-tomato.jpg`,
+  },
+
+  oils: {
+    name: 'Oils',
+    description: 'Quality cooking oils for everyday meals and bulk buying.',
+    image: `${import.meta.env.BASE_URL}images/veg-oil1.jpg`,
+  },
+
+  'soups-spices': {
+    name: 'Soups & Spices',
+    description: 'Essential soups, spices and seasonings for everyday cooking.',
+    image: `${import.meta.env.BASE_URL}images/soup-spices.jpg`,
+  },
 } as const

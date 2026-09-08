@@ -221,14 +221,14 @@ export function Login() {
               Remember me
             </label>
 
-          <button
+          {/* <button
   type="button"
   className="link-button"
   onClick={forgotPassword}
   disabled={loading}
 >
   Forgot password?
-</button>
+</button> */}
           </div>
 
           <button
@@ -265,8 +265,7 @@ export function Login() {
             size={15}
           />
 
-          Secured by Supabase
-          Authentication.
+      Safe & Secured.
         </p>
       </section>
 

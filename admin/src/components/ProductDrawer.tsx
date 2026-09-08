@@ -12,7 +12,7 @@ import { Icon } from './Icons'
 
 type DraftVariant = {
   id: string
-  measurement: string
+  measurement: string | null
   price: number
   available: boolean
 }
@@ -25,23 +25,25 @@ const measurements = [
   'Basket',
   'Half Basket',
   'Paint Bucket',
+  'Half Paint',
+  'Crate',
   '1kg',
   '2kg',
   '5kg',
-  '10kg',
-  '50kg',
   'Whole',
   'Carton',
-  '1L',
-  '5L',
-  '25L',
   'Paint Rubber',
-  'Half Paint Rubber Bag',
+  'Half Paint Rubber',
+  'Derica',
+  'Bag',
+  '1 litre',
+  '2 litres',
+  '5 litres',
 ]
 
 const createBlankVariant = (): DraftVariant => ({
   id: crypto.randomUUID(),
-  measurement: 'Basket',
+  measurement: null,
   price: 0,
   available: true,
 })
@@ -80,6 +82,8 @@ export function ProductDrawer({
   const fileInput = useRef<HTMLInputElement>(null)
 
   const editing = Boolean(product)
+const isSoupsAndSpices =
+  form.category === 'Soups & Spices'
 
   useEffect(() => {
     setForm(
@@ -131,51 +135,58 @@ export function ProductDrawer({
   }
 
   const addVariant = () => {
-    const usedMeasurements = new Set(
-      form.variants.map(
-        (variant) => variant.measurement,
-      ),
+  if (isSoupsAndSpices) {
+    setError(
+      'Soups & Spices products do not use measurements.',
     )
-
-    const nextMeasurement = measurements.find(
-      (measurement) =>
-        !usedMeasurements.has(measurement),
-    )
-
-    if (!nextMeasurement) {
-      setError(
-        'All available measurements have already been added.',
-      )
-      return
-    }
-
-    setForm((current) => ({
-      ...current,
-
-      variants: [
-        ...current.variants,
-
-        {
-          id: crypto.randomUUID(),
-          measurement: nextMeasurement,
-          price: 0,
-          available: true,
-        },
-      ],
-    }))
-
-    setError('')
+    return
   }
+
+  const usedMeasurements = new Set(
+    form.variants.map(
+      (variant) => variant.measurement,
+    ),
+  )
+
+  const nextMeasurement = measurements.find(
+    (measurement) =>
+      !usedMeasurements.has(measurement),
+  )
+
+  if (!nextMeasurement) {
+    setError(
+      'All available measurements have already been added.',
+    )
+    return
+  }
+
+  setForm((current) => ({
+    ...current,
+    variants: [
+      ...current.variants,
+      {
+        id: crypto.randomUUID(),
+        measurement: nextMeasurement,
+        price: 0,
+        available: true,
+      },
+    ],
+  }))
+
+  setError('')
+}
 
   const removeVariant = (
     variantId: string,
   ) => {
-    if (form.variants.length === 1) {
-      setError(
-        'A product must have at least one measurement and price.',
-      )
-      return
-    }
+  if (form.variants.length === 1) {
+  setError(
+    isSoupsAndSpices
+      ? 'A product must have a price.'
+      : 'A product must have at least one measurement and price.',
+  )
+  return
+}
 
     setForm((current) => ({
       ...current,
@@ -269,11 +280,13 @@ export function ProductDrawer({
     }
 
     if (!form.variants.length) {
-      setError(
-        'Please add at least one measurement and price.',
-      )
-      return
-    }
+  setError(
+    isSoupsAndSpices
+      ? 'Add a price for this product.'
+      : 'Add at least one measurement and price.',
+  )
+  return
+}
 
     if (
       form.variants.some(
@@ -281,26 +294,44 @@ export function ProductDrawer({
       )
     ) {
       setError(
-        'Please enter a price greater than 0 for every measurement.',
-      )
+  isSoupsAndSpices
+    ? 'Please enter a price greater than 0.'
+    : 'Please enter a price greater than 0 for every measurement.',
+)
       return
     }
 
-    const selectedMeasurements =
-      form.variants.map(
-        (variant) =>
-          variant.measurement,
-      )
+    // const selectedMeasurements =
+    //   form.variants.map(
+    //     (variant) =>
+    //       variant.measurement,
+    //   )
 
-    if (
-      new Set(selectedMeasurements).size !==
-      selectedMeasurements.length
-    ) {
-      setError(
-        'Each measurement can only be added once.',
-      )
-      return
-    }
+    // if (
+    //   new Set(selectedMeasurements).size !==
+    //   selectedMeasurements.length
+    // ) {
+    //   setError(
+    //     'Each measurement can only be added once.',
+    //   )
+    //   return
+    // }
+
+    const seenMeasurements = new Set<string>()
+
+for (const variant of form.variants) {
+  if (
+    variant.measurement &&
+    seenMeasurements.has(variant.measurement)
+  ) {
+    setError('Each measurement can only be added once.')
+    return
+  }
+
+  if (variant.measurement) {
+    seenMeasurements.add(variant.measurement)
+  }
+}
 
     /*
      * Important:
@@ -336,7 +367,7 @@ export function ProductDrawer({
           (variant) => ({
             ...variant,
             measurement:
-              variant.measurement.trim(),
+              variant.measurement?.trim() || null,
           }),
         ),
       })
@@ -449,12 +480,21 @@ export function ProductDrawer({
 
             <select
               value={form.category}
-              onChange={(event) =>
-                update(
-                  'category',
-                  event.target.value as Category,
-                )
-              }
+              onChange={(event) => {
+  const category = event.target.value as Category
+
+  setForm((current) => ({
+    ...current,
+    category,
+    variants:
+      category === 'Soups & Spices'
+        ? current.variants.map((variant) => ({
+            ...variant,
+            measurement: '',
+          }))
+        : current.variants,
+  }))
+}}
             >
               {categories.map(
                 (category) => (
@@ -488,28 +528,33 @@ export function ProductDrawer({
           <div className="variant-section">
             <div className="variant-section-heading">
               <div>
-                <span className="field-label">
-                  Measurements & Prices
-                </span>
+  <span className="field-label">
+    {isSoupsAndSpices
+      ? 'Price'
+      : 'Measurements & Prices'}
+  </span>
 
-                <p>
-                  Add the different sizes or quantities
-                  customers can buy.
-                </p>
-              </div>
+  <p>
+    {isSoupsAndSpices
+      ? 'Set the price for this product.'
+      : 'Add the different sizes or quantities customers can buy.'}
+  </p>
+</div>
 
-              <button
-                type="button"
-                className="text-button"
-                onClick={addVariant}
-              >
-                <Icon
-                  name="plus"
-                  size={16}
-                />
+{!isSoupsAndSpices && (
+  <button
+    type="button"
+    className="text-button"
+    onClick={addVariant}
+  >
+    <Icon
+      name="plus"
+      size={16}
+    />
 
-                Add measurement
-              </button>
+    Add measurement
+  </button>
+)}
             </div>
 
             <div className="variant-list">
@@ -519,46 +564,39 @@ export function ProductDrawer({
                     className="variant-row"
                     key={variant.id}
                   >
-                    <label>
-                      <span className="sr-only">
-                        Measurement
-                      </span>
+                    {!isSoupsAndSpices && (
+  <label>
+    <span className="sr-only">
+      Measurement
+    </span>
 
-                      <select
-                        value={
-                          variant.measurement
-                        }
-                        onChange={(
-                          event,
-                        ) =>
-                          updateVariant(
-                            variant.id,
-                            'measurement',
-                            event.target.value,
-                          )
-                        }
-                      >
-                        {measurements.map(
-                          (
-                            measurement,
-                          ) => (
-                            <option
-                              key={
-                                measurement
-                              }
-                              value={
-                                measurement
-                              }
-                            >
-                              {
-                                measurement
-                              }
-                            </option>
-                          ),
-                        )}
-                      </select>
-                    </label>
+    <select
+      value={variant.measurement ?? ''}
+      onChange={(event) =>
+        updateVariant(
+          variant.id,
+          'measurement',
+          event.target.value,
+        )
+      }
+    >
+      <option value="">
+        Select measurement
+      </option>
 
+      {measurements.map(
+        (measurement) => (
+          <option
+            key={measurement}
+            value={measurement}
+          >
+            {measurement}
+          </option>
+        ),
+      )}
+    </select>
+  </label>
+)}
                     <label>
                       <span className="sr-only">
                         Price
@@ -590,7 +628,11 @@ export function ProductDrawer({
                     <button
                       type="button"
                       className="icon-button variant-remove"
-                      aria-label={`Remove ${variant.measurement}`}
+                      aria-label={
+  isSoupsAndSpices
+    ? 'Remove price'
+    : `Remove ${variant.measurement}`
+}
                       onClick={() =>
                         removeVariant(
                           variant.id,

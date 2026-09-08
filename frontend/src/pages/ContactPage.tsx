@@ -24,14 +24,14 @@ const methods = [
   {
     icon: Phone,
     title: 'Phone',
-    text: 'Speak directly with our procurement team.',
+    text: 'Speak directly with us.',
     action: BUSINESS.phoneDisplay,
     href: BUSINESS.phoneLink,
   },
   {
     icon: Mail,
     title: 'Email',
-    text: 'For formal and partnership inquiries.',
+    text: 'For general inquiries.',
     action: BUSINESS.email,
     href: `mailto:${BUSINESS.email}`,
   },
@@ -43,7 +43,7 @@ const contactSchema = z.object({
   message: z
     .string()
     .trim()
-    .min(10, 'Please share a little more detail.')
+    .min(5, 'Please share a little more detail.')
     .max(1500, 'Please keep your message under 1,500 characters.'),
 })
 
@@ -97,8 +97,8 @@ ${values.message}`
           </h1>
 
           <p className="mt-4 max-w-2xl text-lg leading-8 text-white/85">
-            Whether you are planning a family kitchen or sourcing for a
-            business, we are ready to help.
+            Whether you are planning for the kitchen or sourcing for a
+            business, we are ready to deliver.
           </p>
         </div>
       </section>
@@ -235,12 +235,12 @@ ${values.message}`
             <dl className="mt-6 space-y-3 text-sm">
               <div className="flex justify-between border-b border-white/15 pb-3">
                 <dt>Monday – Friday</dt>
-                <dd className="font-bold">6:00 AM – 9:00 PM</dd>
+                <dd className="font-bold">6:00 AM – 10:00 PM</dd>
               </div>
 
               <div className="flex justify-between border-b border-white/15 pb-3">
                 <dt>Saturday</dt>
-                <dd className="font-bold">7:00 AM – 9:00 PM</dd>
+                <dd className="font-bold">7:00 AM – 10:00 PM</dd>
               </div>
 
               <div className="flex justify-between">

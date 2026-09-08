@@ -5,9 +5,9 @@ interface RequestContextValue {
   items: RequestItem[]
   totalItems: number
   isDrawerOpen: boolean
-  addItem: (productId: string, measurement: string) => void
-  updateQuantity: (productId: string, measurement: string, quantity: number) => void
-  removeItem: (productId: string, measurement: string) => void
+  addItem: (productId: string, measurement: string | null) => void
+updateQuantity: (productId: string, measurement: string | null, quantity: number) => void
+removeItem: (productId: string, measurement: string | null) => void
   clearRequest: () => void
   setDrawerOpen: (open: boolean) => void
 }
@@ -24,15 +24,15 @@ export function RequestProvider({ children }: { children: ReactNode }) {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)) }, [items])
 
-  const addItem = useCallback((productId: string, measurement: string) => {
+  const addItem = useCallback((productId: string, measurement: string | null) => {
     setItems((current) => {
       const existing = current.find((item) => item.productId === productId && item.measurement === measurement)
       return existing ? current.map((item) => item === existing ? { ...item, quantity: item.quantity + 1 } : item) : [...current, { productId, measurement, quantity: 1 }]
     })
     setDrawerOpen(true)
   }, [])
-  const updateQuantity = useCallback((productId: string, measurement: string, quantity: number) => setItems((current) => quantity < 1 ? current.filter((item) => item.productId !== productId || item.measurement !== measurement) : current.map((item) => item.productId === productId && item.measurement === measurement ? { ...item, quantity } : item)), [])
-  const removeItem = useCallback((productId: string, measurement: string) => setItems((current) => current.filter((item) => item.productId !== productId || item.measurement !== measurement)), [])
+  const updateQuantity = useCallback((productId: string, measurement: string | null, quantity: number) => setItems((current) => quantity < 1 ? current.filter((item) => item.productId !== productId || item.measurement !== measurement) : current.map((item) => item.productId === productId && item.measurement === measurement ? { ...item, quantity } : item)), [])
+  const removeItem = useCallback((productId: string, measurement: string | null) => setItems((current) => current.filter((item) => item.productId !== productId || item.measurement !== measurement)), [])
   const clearRequest = useCallback(() => setItems([]), [])
   const value = useMemo(() => ({ items, totalItems: items.reduce((total, item) => total + item.quantity, 0), isDrawerOpen, addItem, updateQuantity, removeItem, clearRequest, setDrawerOpen }), [items, isDrawerOpen, addItem, updateQuantity, removeItem, clearRequest])
   return <RequestContext.Provider value={value}>{children}</RequestContext.Provider>

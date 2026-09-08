@@ -254,6 +254,12 @@ export function CatalogProvider({
     setLoading(true)
 
     try {
+      const {
+  data: { session },
+} = await supabase.auth.getSession()
+
+console.log('ADMIN SUPABASE SESSION:', session)
+
       const { data: productRows, error: productError } =
         await supabase
           .from('products')

@@ -128,9 +128,11 @@ export function RequestDrawer() {
                         {product.name}
                       </h3>
 
-                      <p className="mt-0.5 text-xs sm:text-sm text-slate-600">
-                        {item.measurement}
-                      </p>
+                      {item.measurement !== null && (
+  <p className="mt-0.5 text-xs sm:text-sm text-slate-600">
+    {item.measurement}
+  </p>
+)}
 
                       <p className="mt-0.5 text-xs sm:text-sm font-bold text-forest">
                         {unitPrice === undefined

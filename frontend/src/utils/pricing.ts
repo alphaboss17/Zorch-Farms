@@ -17,9 +17,11 @@ export function formatNaira(amount: number): string {
 /** Find the variant of a product whose measurement matches the requested one. */
 export function findVariant(
   product: Product | undefined,
-  measurement: string,
+  measurement: string | null,
 ): ProductVariant | undefined {
-  return product?.variants.find((variant) => variant.measurement === measurement)
+  return product?.variants.find(
+    (variant) => variant.measurement === measurement,
+  )
 }
 
 /**
@@ -28,7 +30,7 @@ export function findVariant(
  */
 export function getVariantPrice(
   product: Product | undefined,
-  measurement: string,
+  measurement: string | null,
 ): number | undefined {
   const price = findVariant(product, measurement)?.price
   return typeof price === 'number' ? price : undefined

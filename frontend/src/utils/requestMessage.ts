@@ -33,12 +33,12 @@ export function formatWhatsAppRequest(
 
   // Customer Details
   const customerLines = [
-    'CUSTOMER DETAILS',
-    `Name: ${customer.name.trim()}`,
-    `Phone: ${customer.phone.trim()}`,
+    '*CUSTOMER DETAILS:*',
+    `*Name*: ${customer.name.trim()}`,
+    `*Phone*: ${customer.phone.trim()}`,
   ]
   if (customer.email && customer.email.trim()) {
-    customerLines.push(`Email: ${customer.email.trim()}`)
+    customerLines.push(`*Email*: ${customer.email.trim()}`)
   }
   sections.push(customerLines.join('\n'))
 
@@ -58,7 +58,7 @@ export function formatWhatsAppRequest(
     ].join('\n')
   })
 
-  sections.push(['REQUEST SUMMARY', '', itemBlocks.join('\n\n')].join('\n'))
+  sections.push(['*REQUEST SUMMARY:*', '', itemBlocks.join('\n\n')].join('\n'))
 
   // Total
   const grandTotal = getRequestTotal(items, products)
@@ -72,7 +72,7 @@ export function formatWhatsAppRequest(
 
   // Notes (optional)
   if (customer.notes && customer.notes.trim()) {
-    sections.push(['NOTES', customer.notes.trim()].join('\n'))
+    sections.push(['*NOTES:*', customer.notes.trim()].join('\n'))
   }
 
   // Sign-off

@@ -79,7 +79,7 @@ export function HomePage() {
               Browse Categories
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Hand-picked selections for your daily needs.
+              Hand picked selections for your daily needs.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-12 md:h-[420px]">
@@ -140,7 +140,7 @@ export function HomePage() {
         </div>
       </Section>
 
-      <Section>
+      {/* <Section>
         <div className="page-shell">
           <div className="mb-6 sm:mb-10 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -162,7 +162,7 @@ export function HomePage() {
             ))}
           </div>
         </div>
-      </Section>
+      </Section> */}
 
       <Section className="pt-0">
         <div className="page-shell">

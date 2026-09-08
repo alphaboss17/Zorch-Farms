@@ -1,10 +1,9 @@
 export const categories = [
   'Fresh Produce',
   'Frozen Foods',
-  'Rice & Beans',
-  'Oil',
-  'Spices',
-  'Soup Ingredients',
+  'Grains',
+  'Oils',
+  'Soups & Spices',
 ] as const
 
 export type Category = typeof categories[number]
@@ -12,7 +11,7 @@ export type Category = typeof categories[number]
 export type ProductVariant = {
   id: string
   product_id?: string
-  measurement: string
+  measurement: string | null
   price: number
   available: boolean
   created_at?: string

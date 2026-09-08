@@ -72,8 +72,8 @@ export function CategoriesPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               className="w-full bg-transparent py-2.5 text-base sm:text-sm outline-none placeholder:text-slate-500"
-              placeholder="Search provisions"
-              aria-label="Search provisions"
+              placeholder="Search products"
+              aria-label="Search products"
             />
           </div>
 

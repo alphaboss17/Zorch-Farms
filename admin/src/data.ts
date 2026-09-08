@@ -9,10 +9,10 @@ export const artForCategory = (category: Category) => {
   const art: Record<Category, [string, string]> = {
     'Fresh Produce': ['🥬', '#e6f6d9'],
     'Frozen Foods': ['🍗', '#e7f4f5'],
-    'Rice & Beans': ['🫘', '#f7eed8'],
-    Oil: ['🫗', '#fff4cc'],
-    Spices: ['🌶️', '#fff0df'],
-    'Soup Ingredients': ['🥣', '#f1eadf'],
+    Grains: ['🌾', '#f7eed8'],
+    Oils: ['🫗', '#fff4cc'],
+    'Soups & Spices': ['🌶️', '#fff0df'],
+    // 'Soup Ingredients': ['🥣', '#f1eadf'],
   }
 
   const selectedArt = art[category]
@@ -22,4 +22,4 @@ export const artForCategory = (category: Category) => {
   }
 
   return productArt(...selectedArt)
-}
+}
