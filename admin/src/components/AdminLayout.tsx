@@ -189,7 +189,7 @@ export function AdminLayout() {
             }
           >
             <span className="profile-avatar">
-              AO
+              A
             </span>
 
             <span className="profile-copy">

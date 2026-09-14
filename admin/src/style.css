@@ -91,8 +91,8 @@ p {
 }
 
 .is-collapsed .sidebar {
-  width: 76px;
-  flex-basis: 76px;
+  width: 100px;
+  flex-basis: 100px;
 }
 
 .sidebar-top {
@@ -396,7 +396,7 @@ p {
 }
 
 .button-danger:hover {
-  background: #a92a2a;
+  background: #d5b2b2;
 }
 
 .button-danger-quiet {
