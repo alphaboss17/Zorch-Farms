@@ -7,7 +7,7 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             manifest: {
-                name: 'Zorch Farms Admin',
+                name: 'Zorch-Farms Admin',
                 short_name: 'Zorch Admin',
                 description: 'Zorch Farms administration dashboard',
                 theme_color: '#ffffff',

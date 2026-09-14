@@ -13,6 +13,7 @@ export const artForCategory = (category: Category) => {
     Oils: ['🫗', '#fff4cc'],
     'Soups & Spices': ['🌶️', '#fff0df'],
     // 'Soup Ingredients': ['🥣', '#f1eadf'],
+    'Others': ['🛒', '#eef1f3'],
   }
 
   const selectedArt = art[category]

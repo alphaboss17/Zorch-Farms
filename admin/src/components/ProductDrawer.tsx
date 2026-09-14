@@ -82,8 +82,9 @@ export function ProductDrawer({
   const fileInput = useRef<HTMLInputElement>(null)
 
   const editing = Boolean(product)
-const isSoupsAndSpices =
-  form.category === 'Soups & Spices'
+const isPriceOnlyCategory =
+  form.category === 'Soups & Spices' ||
+  form.category === 'Others'
 
   useEffect(() => {
     setForm(
@@ -135,9 +136,9 @@ const isSoupsAndSpices =
   }
 
   const addVariant = () => {
-  if (isSoupsAndSpices) {
+  if (isPriceOnlyCategory) {
     setError(
-      'Soups & Spices products do not use measurements.',
+      'Price-only products do not use measurements.',
     )
     return
   }
@@ -181,7 +182,7 @@ const isSoupsAndSpices =
   ) => {
   if (form.variants.length === 1) {
   setError(
-    isSoupsAndSpices
+    isPriceOnlyCategory
       ? 'A product must have a price.'
       : 'A product must have at least one measurement and price.',
   )
@@ -281,7 +282,7 @@ const isSoupsAndSpices =
 
     if (!form.variants.length) {
   setError(
-    isSoupsAndSpices
+    isPriceOnlyCategory
       ? 'Add a price for this product.'
       : 'Add at least one measurement and price.',
   )
@@ -294,7 +295,7 @@ const isSoupsAndSpices =
       )
     ) {
       setError(
-  isSoupsAndSpices
+  isPriceOnlyCategory
     ? 'Please enter a price greater than 0.'
     : 'Please enter a price greater than 0 for every measurement.',
 )
@@ -487,10 +488,10 @@ for (const variant of form.variants) {
     ...current,
     category,
     variants:
-      category === 'Soups & Spices'
+      category === 'Soups & Spices' || category === 'Others'
         ? current.variants.map((variant) => ({
             ...variant,
-            measurement: '',
+            measurement: null,
           }))
         : current.variants,
   }))
@@ -529,19 +530,19 @@ for (const variant of form.variants) {
             <div className="variant-section-heading">
               <div>
   <span className="field-label">
-    {isSoupsAndSpices
+    {isPriceOnlyCategory 
       ? 'Price'
       : 'Measurements & Prices'}
   </span>
 
   <p>
-    {isSoupsAndSpices
+    {isPriceOnlyCategory
       ? 'Set the price for this product.'
       : 'Add the different sizes or quantities customers can buy.'}
   </p>
 </div>
 
-{!isSoupsAndSpices && (
+{!isPriceOnlyCategory && (
   <button
     type="button"
     className="text-button"
@@ -564,7 +565,7 @@ for (const variant of form.variants) {
                     className="variant-row"
                     key={variant.id}
                   >
-                    {!isSoupsAndSpices && (
+                    {!isPriceOnlyCategory && (
   <label>
     <span className="sr-only">
       Measurement
@@ -629,7 +630,7 @@ for (const variant of form.variants) {
                       type="button"
                       className="icon-button variant-remove"
                       aria-label={
-  isSoupsAndSpices
+  isPriceOnlyCategory
     ? 'Remove price'
     : `Remove ${variant.measurement}`
 }

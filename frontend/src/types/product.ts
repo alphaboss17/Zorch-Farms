@@ -4,6 +4,7 @@ export type CategoryId =
   | 'grains'
   | 'oils'
   | 'soups-spices'
+  | 'others'
 
 export interface ProductVariant {
   id: string

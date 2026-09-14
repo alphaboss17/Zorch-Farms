@@ -37,4 +37,10 @@ export const CATEGORY_META = {
     description: 'Essential soups, spices and seasonings for everyday cooking.',
     image: `${import.meta.env.BASE_URL}images/soup-spices.jpg`,
   },
+
+  'others': {
+    name: 'Others',
+    description: 'A variety of other products for your needs.',
+    image: `${import.meta.env.BASE_URL}images/others.jpg`,
+  },
 } as const

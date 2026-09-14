@@ -18,6 +18,9 @@ function normalizeCategory(category: string): CategoryId {
     case 'Soups & Spices':
       return 'soups-spices'
 
+    case 'Others':
+      return 'others'
+
     default:
       throw new Error(`Unknown product category: ${category}`)
   }

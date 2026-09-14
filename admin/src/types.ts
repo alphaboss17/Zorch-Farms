@@ -4,6 +4,7 @@ export const categories = [
   'Grains',
   'Oils',
   'Soups & Spices',
+  'Others',
 ] as const
 
 export type Category = typeof categories[number]

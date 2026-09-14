@@ -18,14 +18,16 @@ export function ProductCard({ product }: { product: Product }) {
 
   const { addItem } = useRequest()
 
-  const isSoupsAndSpices = product.category === 'soups-spices'
+const isPriceOnlyCategory =
+  product.category === 'soups-spices' ||
+  product.category === 'others'
 
   const availableVariants = product.variants.filter(
     (variant) => variant.available,
   )
 
   const onAdd = () => {
-    if (isSoupsAndSpices) {
+    if (isPriceOnlyCategory) {
       if (!selectedNoMeasurement) return
 
       addItem(product.id, null)
@@ -67,7 +69,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.description}
         </p>
 
-        {isSoupsAndSpices ? (
+        {isPriceOnlyCategory ? (
           <div className="mb-4 sm:mb-5">
             {availableVariants.map((variant) => (
               <Chip
@@ -108,7 +110,7 @@ export function ProductCard({ product }: { product: Product }) {
           variant="secondary"
           fullWidth
           disabled={
-            isSoupsAndSpices
+            isPriceOnlyCategory
               ? !selectedNoMeasurement
               : !measurement
           }
