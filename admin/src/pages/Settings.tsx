@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase'
 
 export function Settings() {
   const [name, setName] = useState('Zorch Farms Admin')
-  const [email, setEmail] = useState('admin@zorchfarms.com')
+  const [email, setEmail] = useState('awele.juga@gmail.com')
 
   const { showToast } = useCatalog()
   const navigate = useNavigate()

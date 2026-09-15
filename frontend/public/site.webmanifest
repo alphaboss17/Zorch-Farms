@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Zorch Farms",
+  "short_name": "Zorch Farms",
   "icons": [
     {
       "src": "/Zorch-Farms/web-app-manifest-192x192.png",
