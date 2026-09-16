@@ -16,14 +16,15 @@
 <link rel="manifest" href="/site.webmanifest" />
     <!-- GitHub Pages SPA redirect restore: runs before the app so React Router sees the real path -->
     <script>
-      (function () {
-        var params = new URLSearchParams(window.location.search)
-        var redirect = params.get('redirect')
-        if (redirect) {
-          window.history.replaceState(null, '', '/Zorch-Farms' + redirect)
-        }
-      })()
-    </script>
+  (function () {
+    var params = new URLSearchParams(window.location.search)
+    var redirect = params.get('redirect')
+
+    if (redirect) {
+      window.history.replaceState(null, '', redirect)
+    }
+  })()
+</script>
     <title>Zorch Farms | Fresh provisions, simplified</title>
   </head>
   <body>
