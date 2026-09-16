@@ -1,10 +1,12 @@
 import {
   Clock3,
   Mail,
+  MapPin,
   MessageCircle,
   Phone,
   Send,
 } from 'lucide-react'
+
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -139,8 +141,7 @@ ${values.message}`
           </h2>
 
           <p className="mt-2 text-sm text-slate-600">
-            For general questions, send us an email and we will respond as soon
-            as we can.
+            For general questions, enquiries or requests, send us an email and we will respond promptly.
           </p>
 
           {sent ? (
@@ -255,26 +256,18 @@ ${values.message}`
             </p>
           </div>
 
-          {/* Location */}
-          {/* <div className="relative min-h-52 overflow-hidden rounded-2xl bg-slate-200 shadow-soft">
-            <img
-              src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1000&q=85"
-              alt="Lagos city view"
-              className="h-52 w-full object-cover"
-              loading="lazy"
-            />
+          
+{/* Store Address */}
+<div className="rounded-2xl bg-forest p-7 text-white shadow-soft">
+  <h2 className="flex items-center gap-2 font-display text-2xl font-bold">
+    <MapPin size={22} />
+    Store Address
+  </h2>
 
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 p-5 text-white">
-              <p className="flex items-center gap-2 font-bold">
-                <MapPin size={17} />
-                Lagos HQ
-              </p>
-
-              <p className="mt-1 text-sm text-white/80">
-                {BUSINESS.location}
-              </p>
-            </div>
-          </div> */}
+  <p className="mt-4 text-sm leading-6 text-white/85">
+    {BUSINESS.location}
+  </p>
+</div>
         </div>
       </section>
     </>

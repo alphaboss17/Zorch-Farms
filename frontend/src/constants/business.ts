@@ -1,6 +1,6 @@
 export const BUSINESS = {
   name: 'Zorch Farms',
-  location: 'Majek, Bashorun Town, Lagos State, Nigeria',
+  location: '74 Bashorun street Majek, Lekki-Epe, Lagos State, Nigeria',
   phoneDisplay: '+234 8031310752',
   phoneLink: 'tel:+2348031310752',
   email: 'awele.juga@gmail.com',
